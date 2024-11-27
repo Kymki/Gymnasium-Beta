@@ -13,6 +13,7 @@ Installa le librerie con i seguenti comandi:
 
 pip install gymnasium
 pip install numpy
+
 Sistema operativo:
 Il codice è compatibile con qualsiasi sistema operativo in cui sia installato Python 3.7 o superiore.
 
@@ -20,7 +21,9 @@ Istruzioni per l'Esecuzione
 
 Clona o copia il repository: Salva il codice in un file Python, ad esempio sql_injection_rl.py.
 Avvia il file Python: Esegui il file dal terminale con il seguente comando:
+
 python sql_injection_rl.py
+
 Addestramento:
 L'agente verrà addestrato per 5000 episodi utilizzando l'algoritmo di Q-learning.
 Ogni 1000 episodi, verrà mostrato il progresso dell'addestramento con il valore attuale di epsilon (fattore di esplorazione).
