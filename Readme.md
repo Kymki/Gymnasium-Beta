@@ -1,110 +1,55 @@
-Questo progetto implementa un ambiente personalizzato per simulare attacchi di SQL Injection utilizzando il framework Gymnasium. È incluso un agente di Reinforcement Learning (RL) basato sull'algoritmo Q-Learning.
+Simulazione di Attacco di SQL Injection con Q-learning
 
-  
+Questa simulazione dimostra come un agente di Q-learning possa essere utilizzato per identificare e sfruttare una vulnerabilità di SQL injection in un'applicazione web vulnerabile. Il codice è composto da due parti principali:
 
-Requisiti
+Un server web vulnerabile creato con Flask. (Web_server.py)
+Un agente di Q-learning che interagisce con il server per cercare di eseguire l'iniezione SQL.
+Prerequisiti:
+Python 3.6+ installato con le seguenti librerie:
 
-  
+Flask (per il server web vulnerabile)
+Gymnasium (per l'ambiente di simulazione di Q-learning)
+Requests (per inviare richieste HTTP al server web)
 
-Prima di eseguire il progetto, assicurati di avere i seguenti requisiti:
+Passo 1: Installare le dipendenze
 
-  
+pip install -r requirements.txt
 
-Librerie Python necessarie:
+python3 -m venv sql_injection_env
+Attiva l'ambiente virtuale:
 
-Gymnasium: Per l'ambiente RL.
+Su Windows:
+sql_injection_env\Scripts\activate
+Su macOS/Linux:
 
-NumPy: Per la gestione delle operazioni matematiche.
+source sql_injection_env/bin/activate
 
-Installa le librerie con i seguenti comandi:
+Installa le dipendenze necessarie:
 
-  
+pip install flask gymnasium requests numpy
 
-    pip install gymnasium
-    
-    pip install numpy
+Passo 2: Creare il server web vulnerabile
 
-Sistema operativo:
+Passo 3: Avviare il server Flask
+Avvia il server Flask eseguendo il file Web_server.py:
 
-Il codice è compatibile con qualsiasi sistema operativo in cui sia installato Python 3.7 o superiore.
+python Web_server.py
 
-  
+Il server sarà in esecuzione su http://localhost:5000 e avrà una vulnerabilità di SQL injection nell'endpoint /login.
+Passo 4: Creare l'ambiente di Q-learning
+Passo 5: Eseguire la simulazione
+(è avviato su http://localhost:5000)?
 
-Istruzioni per l'Esecuzione
+python sql_injection_rl.py
 
-  
+Durante l'esecuzione, l'agente di Q-learning tenterà di identificare e sfruttare la vulnerabilità SQL injection nel server web. Se l'agente riesce a trovare una SQL injection funzionante, verrà fornita una ricompensa e il test terminerà.
 
-Clona o copia il repository: Salva il codice in un file Python, ad esempio sql_injection_rl.py.
+Passo 6: Monitoraggio e risultati
 
-Avvia il file Python: Esegui il file dal terminale con il seguente comando:
+Durante l'esecuzione del codice, progresso su console che indicano il progresso dell'agente durante il processo di addestramento, come ad esempio:
 
-    python sql_injection_rl.py
-
-Addestramento:
-
-L'agente verrà addestrato per 5000 episodi utilizzando l'algoritmo di Q-learning.
-
-Ogni 1000 episodi, verrà mostrato il progresso dell'addestramento con il valore attuale di epsilon (fattore di esplorazione).
-
-Test dell'agente: Dopo l'addestramento, l'agente sarà testato per verificare la sua capacità di navigare nell'ambiente e identificare il flag.
-
-File principali
-
-  
-
-sql_injection_rl.py: Script principale che implementa l'ambiente di SQL Injection e il Q-Learning.
-
-Moduli inclusi nello script:
-
-**gymnasium: Per la creazione e gestione dell'ambiente.
-numpy: Per operazioni matematiche e gestione della Q-table.**
-
-Configurazione dell'algoritmo
-
-  
-
-Il Q-Learning utilizza i seguenti parametri configurabili:
-
-  
-
-learning_rate: Tasso di apprendimento (
-
-α
-
-α), default: 0.1.
-
-discount_factor: Fattore di sconto (
-
-γ
-
-γ), default: 0.99.
-
-epsilon: Probabilità di esplorazione iniziale, default: 1.0.
-
-epsilon_decay: Decadimento di epsilon per ridurre l'esplorazione nel tempo, default: 0.995.
-
-min_epsilon: Valore minimo di epsilon, default: 0.1.
-
-episodes: Numero di episodi per l'addestramento, default: 5000.
-
-Funzionalità
-
-Simulazione di attacchi di SQL Injection con tre stati:
-
-**Stato iniziale (0).
-Vulnerabilità trovata (1).
-Flag trovato (2).**
-
-Ricompense:
-
--1 per azioni non utili.
-
-+10 per identificare una vulnerabilità.
-
-+100 per trovare il flag.
-
-Prossimi Passi
-
-Integrare algoritmi più avanzati come Deep Q-Learning per migliorare le prestazioni.
-
-Espandere l'ambiente per includere più stati e azioni legati a scenari di hacking reali.
+Episodio 1000, epsilon: 0.97
+Episodio 2000, epsilon: 0.94
+Episodio 3000, epsilon: 0.91
+...
+Una volta che l'agente ha completato l'addestramento, il programma eseguirà il test finale, mostrando lo stato attuale dell'ambiente e se l'attacco ha avuto successo.
