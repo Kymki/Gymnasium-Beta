@@ -1,3 +1,4 @@
-Flask
-Gymnasium
-Requests
+flask==2.2.3
+gymnasium==0.28.1
+requests==2.31.0
+numpy==1.23.5
